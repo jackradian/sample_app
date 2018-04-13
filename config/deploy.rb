@@ -6,13 +6,14 @@ set :repo_url, "git@github.com:test-sample-app/sample_app.git" # Edit this to ma
 set :branch, :master
 set :deploy_to, "/u/apps/sampleapp"
 set :pty, true
-set :scm, :rsync
 set :bundle_flags, ""
+set :user, "ec2-user"
+set :use_sudo, true
 
-set :linked_files, %w{.env config/database.yml config/smtp_settings.yml config/cable.yml}
+set :linked_files, %w{.env config/database.yml}
 set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system public/uploads}
 set :keep_releases, 5
-set :rvm_type, :user
+set :rvm_type, :system
 
 set :puma_rackup, -> { File.join(current_path, "config.ru") }
 set :puma_state, "#{shared_path}/tmp/pids/puma.state"
@@ -27,7 +28,9 @@ set :puma_threads, [0, 8]
 set :puma_workers, 0
 set :puma_worker_timeout, nil
 set :puma_init_active_record, true
-set :puma_preload_app, false# Default branch is :master
+set :puma_preload_app, false
+
+# Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 
 # Default deploy_to directory is /var/www/my_app_name
