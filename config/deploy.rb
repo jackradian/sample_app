@@ -2,7 +2,7 @@
 lock "3.10.1"
 
 set :application, "sample_app"
-set :repo_url, "git@github.com:jackradian/sample_app.git" # Edit this to match your repository
+set :repo_url, "git@github.com:test-sample-app/sample_app.git" # Edit this to match your repository
 set :branch, :master
 set :deploy_to, "/u/apps/sampleapp"
 set :pty, true
