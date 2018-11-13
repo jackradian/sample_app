@@ -1,12 +1,11 @@
 # config valid for current version and patch releases of Capistrano
-lock "3.10.1"
+lock "3.11.0"
 
 set :application, "sample_app"
 set :repo_url, "git@github.com:test-sample-app/sample_app.git" # Edit this to match your repository
 set :branch, :master
 set :deploy_to, "/u/apps/sampleapp"
 set :pty, true
-set :bundle_flags, ""
 set :user, "ec2-user"
 set :use_sudo, true
 
@@ -14,6 +13,13 @@ set :linked_files, %w{.env config/database.yml}
 set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system public/uploads}
 set :keep_releases, 5
 set :rvm_type, :system
+
+set :rails_env, fetch(:stage)
+# Bundler config
+set :bundle_flags, "--quiet"
+set :bundle_path, -> { shared_path.join("bundle") }
+set :bundle_binstubs, -> { shared_path.join("bin") }
+set :bundle_without, (["development", "test", "staging", "production"] - [fetch(:stage).to_s]).join(" ")
 
 set :puma_rackup, -> { File.join(current_path, "config.ru") }
 set :puma_state, "#{shared_path}/tmp/pids/puma.state"
