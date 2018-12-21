@@ -12,7 +12,7 @@ set :use_sudo, true
 set :linked_files, %w{.env config/database.yml}
 set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system public/uploads}
 set :keep_releases, 5
-set :rvm_type, :system
+set :rbenv_ruby, '2.4.1'
 
 set :rails_env, fetch(:stage)
 # Bundler config
